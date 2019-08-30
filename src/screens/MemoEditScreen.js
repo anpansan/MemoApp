@@ -7,20 +7,24 @@ import CircleButton from '../elements/CircleButton';
 
 class MemoEditScreen extends React.Component {
   state = {
-    memo: {},
+    body: '',
+    key: '',
   }
 
   componentWillMount() {
     const { params } = this.props.navigation.state;
-    this.setState({ memo: params.memo });
+    this.setState({
+      body: params.memo.body,
+      key: params.memo.key
+    });
   }
 
   handlePress() {
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
-    db.collection(`user/${currentUser.uid}/memos`).doc(this.state.memo.key)
+    db.collection(`users/${currentUser.uid}/memos`).doc(this.state.key)
       .update({
-        body: this.state.memo.body,
+        body: this.state.body,
       })
       .then(() => {
 
