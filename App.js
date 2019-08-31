@@ -14,12 +14,12 @@ import ENV from './env.json';
 require("firebase/firestore");
 
 const config = {
-  apiKey:            'AIzaSyBThSp3Jy14jpqWKZw8iS5czT9tH9l3DhM',
-  authDomain:        'memoapp-5f7b5.firebaseapp.com',
-  databaseURL:       'https://memoapp-5f7b5.firebaseio.com',
-  projectId:         'memoapp-5f7b5',
-  storageBucket:     '',
-  messagingSenderId: '1088678121415',
+  apiKey:             ENV.FIREBASE_API_KEY,
+  authDomain:         ENV.FIREBASE_AUTH_DOMAIN,
+  databaseURL:        ENV.FIREBASE_DB_URL,
+  projectId:          ENV.FIREBASE_PRJ_ID,
+  storageBucket:      ENV.FIREBASE_STORAGE,
+  messagingSenderId:  ENV.FIREBASE_SENDER_ID,
 };
 firebase.initializeApp(config);
 

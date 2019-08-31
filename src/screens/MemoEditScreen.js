@@ -22,13 +22,16 @@ class MemoEditScreen extends React.Component {
   handlePress() {
     const { currentUser } = firebase.auth();
     const db = firebase.firestore();
-    const newDate = new Date();
-    db.collection(`users/${currentUser.uid}/memos`).doc(this.state.key)
+    // const newDate = new Date();
+    const newDate = firebase.firestore.Timestamp.now();
+    const docRef = db.collection(`users/${currentUser.uid}/memos`).doc(this.state.key);
+    docRef
       .update({
         body: this.state.body,
         createdOn: newDate,
       })
       .then(() => {
+        this.setState({ body: this.state.body });
         const { navigation } = this.props;
         navigation.state.params.returnMemo({
           body: this.state.body,
@@ -49,9 +52,9 @@ class MemoEditScreen extends React.Component {
           style={styles.memoEditInput}
           multiline
           value={this.state.body}
-          onChangeText={(text) => { this.setState({ memo: { body: text } }); }}
+          onChangeText={(text) => { this.setState({ body: text }); }}
         />
-        <CircleButton name="check" onPress={() => { this.handlePress.bind(this); }} />
+        <CircleButton name="check" onPress={this.handlePress.bind(this)} />
       </View>
     );
   }

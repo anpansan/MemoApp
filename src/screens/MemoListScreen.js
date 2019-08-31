@@ -18,23 +18,11 @@ class MemoListScreen extends React.Component {
     db.collection(`users/${currentUser.uid}/memos`)
       .onSnapshot((snapshot) => {
         const memoList = [];
-        snapshot.push({ ...doc.data(), key: doc.id});
-      })
-      this.setState({ memoList });
-      /*
-      .get()
-      .then((snapshot) => {
-        const memoList = [];
         snapshot.forEach((doc) => {
           memoList.push({ ...doc.data(), key: doc.id });
         });
         this.setState({ memoList });
-        console.log("success");
-      })
-      .catch((error) => {
-        console.log(error);
       });
-      */
   }
 
   handlePress() {
@@ -45,7 +33,7 @@ class MemoListScreen extends React.Component {
     return (
       <View style={styles.container}>
         <MemoList memoList={this.state.memoList} navigation={this.props.navigation} />
-        <CircleButton name="plus" onPress={this.handlePress.bind(this)}/>
+        <CircleButton name="plus" onPress={this.handlePress.bind(this)} />
       </View>
     );
   }

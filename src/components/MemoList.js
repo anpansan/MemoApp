@@ -4,7 +4,7 @@ import {
   View,
   Text,
   TouchableHighlight,
-  FlatList
+  FlatList,
 } from 'react-native';
 
 const dateString = (date) => {
